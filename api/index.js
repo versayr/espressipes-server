@@ -24,7 +24,7 @@ const turso = createClient({
 
 // Example: GET endpoint to fetch data
 app.get('/drinks/specials', async (_, res) => {
-  const result = await turso.execute("SELECT name, id FROM drinks WHERE currentSpecial = true ORDER BY name ASC");
+  const result = await turso.execute("SELECT name, id FROM drinks WHERE currentSpecial = true ORDER BY created_date DSC");
   res.json(result);
 });
 
