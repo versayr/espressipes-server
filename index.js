@@ -10,7 +10,7 @@ const port = 3000
 const corsOptions = {
   origin: 'https://espressipes-client.vercel.app', // Replace with your specific domain
   methods: 'GET,POST,PUT,DELETE', // Specify allowed HTTP methods
-  allowedHeaders: 'Content-Type,Authorization' 
+  allowedHeaders: ['Content-Type', 'Authorization']
 }
 
 app.use(cors(corsOptions));
@@ -42,3 +42,5 @@ app.get('/drinks/:id', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+module.exports = app;
