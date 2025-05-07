@@ -7,7 +7,13 @@ dotenv.config();
 const app = express()
 const port = 3000
 
-app.use(cors());
+const corsOptions = {
+  origin: 'https://espressipes-client.vercel.app/', // Replace with your specific domain
+  methods: 'GET,POST,PUT,DELETE', // Specify allowed HTTP methods
+  allowedHeaders: 'Content-Type,Authorization' 
+}
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 const turso = createClient({
@@ -29,7 +35,7 @@ app.get('/drinks', async (_, res) => {
 app.get('/drinks/:id', async (req, res) => {
   const id = req.params.id;
   const result = await turso.execute(`SELECT * FROM drinks WHERE id = ${id}`);
-  res.json(result);
+  res.json(result.rows);
 });
 
 // Start the server
